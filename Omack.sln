@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omack.Core", "Omack.Core\Omack.Core.csproj", "{EA0924BB-6CA1-41CB-90B4-62581B232CCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omac.Data", "Omac.Data\Omac.Data.csproj", "{7072802A-C1A3-431B-A6A7-964707F37484}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omack.Data", "Omac.Data\Omack.Data.csproj", "{7072802A-C1A3-431B-A6A7-964707F37484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omac.Test", "Omac.Test\Omac.Test.csproj", "{226EEE90-A65D-4371-8900-E83F1DEA1A03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omack.Test", "Omac.Test\Omack.Test.csproj", "{226EEE90-A65D-4371-8900-E83F1DEA1A03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omac.Api", "Omac.Api\Omac.Api.csproj", "{979A484E-DF6B-4B12-85E9-FA907A4313CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omack.Web", "Omac.Web\Omack.Web.csproj", "{39D70907-13F3-4B5B-9BAD-7980526C7339}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omac.Web", "Omac.Web\Omac.Web.csproj", "{39D70907-13F3-4B5B-9BAD-7980526C7339}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omack.Api", "Omack.Api\Omack.Api.csproj", "{153A857D-D22C-478B-AA76-54A61AAFB480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{226EEE90-A65D-4371-8900-E83F1DEA1A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{226EEE90-A65D-4371-8900-E83F1DEA1A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{226EEE90-A65D-4371-8900-E83F1DEA1A03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{979A484E-DF6B-4B12-85E9-FA907A4313CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{979A484E-DF6B-4B12-85E9-FA907A4313CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{979A484E-DF6B-4B12-85E9-FA907A4313CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{979A484E-DF6B-4B12-85E9-FA907A4313CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39D70907-13F3-4B5B-9BAD-7980526C7339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39D70907-13F3-4B5B-9BAD-7980526C7339}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39D70907-13F3-4B5B-9BAD-7980526C7339}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39D70907-13F3-4B5B-9BAD-7980526C7339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{153A857D-D22C-478B-AA76-54A61AAFB480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{153A857D-D22C-478B-AA76-54A61AAFB480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{153A857D-D22C-478B-AA76-54A61AAFB480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{153A857D-D22C-478B-AA76-54A61AAFB480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
