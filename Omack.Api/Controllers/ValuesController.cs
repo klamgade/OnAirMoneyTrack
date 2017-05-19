@@ -17,7 +17,7 @@ namespace Omack.Api.Controllers
         }
 
         //api/values/int
-        [HttpGet("{id}")]  //to work with parameters in routing, curley braces are used.
+        [HttpGet("{id}")]  //to work with parameters in routing, curley braces are used. //
         public JsonResult GetItem(int Id)
         {
             return new JsonResult(SampleData.Current.Items.FirstOrDefault(i => i.Id == Id));
