@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Omack.Api
 {
@@ -28,7 +30,21 @@ namespace Omack.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            //add MVC with some modifications if needed.
+            services.AddMvc()
+                    .AddMvcOptions(o =>
+                    {
+                        o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+                    });
+            //sets the default camelcase format for returned json result to null, which will finally depened upon C# object's property names
+            //.AddJsonOptions(o =>
+            //{
+            //    if (o.SerializerSettings.ContractResolver != null)
+            //    {
+            //        var castedResolver = o.SerializerSettings.ContractResolver as DefaultContractResolver;
+            //        castedResolver.NamingStrategy = null;     //sets the defaults to null
+            //    }
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +52,7 @@ namespace Omack.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            app.UseStatusCodePages();  //to show status code to the browser. Otherwise we have to look through console to inspect status code.
             app.UseMvc();
         }
     }

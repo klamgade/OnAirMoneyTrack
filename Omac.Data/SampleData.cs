@@ -20,7 +20,7 @@ namespace Omack.Data
                 new Items{Id = 7, Name = "Breads", DatePurchased= DateTime.UtcNow, Price = 1},
             };
         }
-        public static SampleData Current { get; set; } = new SampleData();
+        public static SampleData Current { get; set; } = new SampleData();  //ignore this code if you want to initialize SampleData somewhere. Otherwise just call this static method
         public List<Items> Items { get; set; }
         
     }
