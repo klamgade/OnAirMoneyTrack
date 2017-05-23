@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Omack.Data.CustomValidations;
 
 namespace Omack.Data
 {
@@ -27,9 +29,21 @@ namespace Omack.Data
   
     public class Items
     {
+        [Required]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "You need to provide the name")]
+        [MaxLength(50, ErrorMessage = "Name cannot be more than 50 characters long")]
         public string Name { get; set; }
+
+        [IsBelowCurrentDate(ErrorMessage = "The entered date cannot be greater than current date.")]
         public DateTime DatePurchased { get; set; }
         public decimal Price { get; set; }
+    }
+    public class IpAddress
+    {
+        public string Ip { get; set; }
+        public string DateChanged { get; set; }
+
     }
 }
