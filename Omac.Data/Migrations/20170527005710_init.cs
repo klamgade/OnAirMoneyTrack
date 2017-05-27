@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Omack.Standard.Migrations
+namespace Omack.Data.Migrations
 {
     public partial class init : Migration
     {
@@ -15,8 +15,9 @@ namespace Omack.Standard.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ItemName = table.Column<string>(nullable: true),
-                    ItemPrice = table.Column<decimal>(nullable: false)
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

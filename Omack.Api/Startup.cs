@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace Omack.Api
 {
@@ -21,6 +23,7 @@ namespace Omack.Api
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+            env.ConfigureNLog("nlog.config"); //ConfigureNlog is extention method from Nlog to get configuration details from "nlog.config" file.
             Configuration = builder.Build();
         }
 
@@ -50,8 +53,10 @@ namespace Omack.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug(); //by default: Information level or more serious. to log critical error .AddDebug(LogLevel.Critical).
+            //loggerFactory.AddConsole();
+            //loggerFactory.AddDebug(); //by default: Information level or more serious. to log critical error .AddDebug(LogLevel.Critical).            
+            loggerFactory.AddNLog(); //buildin extension for Nlog
+            app.AddNLogWeb();
             app.UseStatusCodePages();  //to show status code to the browser. Otherwise we have to look through console to inspect status code.
             app.UseMvc();
         }

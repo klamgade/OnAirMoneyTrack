@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Omack.Standard;
+using Omack.Data.DAL;
 
-namespace Omack.Standard.Migrations
+namespace Omack.Data.Migrations
 {
-    [DbContext(typeof(ItemContext))]
-    [Migration("20170525101253_ininit")]
-    partial class ininit
+    [DbContext(typeof(OmackContext))]
+    [Migration("20170527005710_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,14 +17,16 @@ namespace Omack.Standard.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Omack.Standard.Models.Item", b =>
+            modelBuilder.Entity("Omack.Data.Models.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ItemName");
+                    b.Property<DateTime>("DateCreated");
 
-                    b.Property<decimal>("ItemPrice");
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
 
                     b.HasKey("Id");
 
