@@ -5,12 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Omack.Data;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.Extensions.Logging;
 
 namespace Omack.Api.Controllers
 {
     [Route("api/values")]   //routing are of two types: 1. Conventional MVC Routing & 2. Attribute Routing. This is attribute routing.
     public class ValuesController : Controller
     {
+        private ILogger<ValuesController> _logger; //Ilogger service is implemented by default, so we don't have to add it as service but we can configure in ConfigureServices method in startup.cs.
+        public ValuesController(ILogger<ValuesController> logger) //d.I through constructor....also called as container 
+        {
+            _logger = logger;
+        }
         //[HttpGet()]
         public JsonResult GetItemsTest()
         //returning JsonResult is not a good practice for api. Instead we can use IActionResult that has helper methods to send status code as well. 
@@ -39,11 +45,25 @@ namespace Omack.Api.Controllers
 
         // api/values/int
         [HttpGet("{id}", Name = "GetItem")]  //to work with parameters in routing, curley braces are used. for mulitple parameter: [HttpGet("Group/{userId}/createItem/{Id}")]
-        public IActionResult GetItem(int Id)
+        public IActionResult GetItem(int id)
         {
-            var item = SampleData.Current.Items.SingleOrDefault(i => i.Id == Id);
-            if (item == null) { return NotFound("Sorry. This item does not exists."); } //will return 404 status code with error.
-            return Ok(item);   //this is new syntax but still same like if else. And it return item with correct status code. 404 if null, otherwise 200
+            try
+            {
+                throw new Exception("Exception Sample");
+                var item = SampleData.Current.Items.SingleOrDefault(i => i.Id == id);
+                if (item == null)
+                {
+                    _logger.LogInformation($"Item with id {id} wasn't found."); //C#6.0: String Interpolation. replacing {} with variable. use "$" before string contructor
+                    return NotFound("Sorry. This item does not exists."); //will return 404 status code with message.
+                }
+                return Ok(item);   //this is new syntax but still same like if else. And it return item with correct status code. 404 if null, otherwise 200
+            }
+            catch(Exception ex)
+            {
+                _logger.LogInformation($"Exception while getting value with id{id}. Exception: {ex.Message}");
+                return StatusCode(500, "A problem happened while handling your request."); //its not good to return actual expception, because consumer of API should get any information about our implementation.
+            }
+           
         }
 
         //api/values
@@ -88,6 +108,20 @@ namespace Omack.Api.Controllers
             }
             return NoContent();  //normally for update and partial update we dont return content, because they already know the information.
 
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteItem(int id)
+        {
+            var item = SampleData.Current.Items.FirstOrDefault(i => i.Id == id);
+            if(item != null)
+            {
+                SampleData.Current.Items.Remove(item);
+                return NoContent();  //delete should return no content
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
     }

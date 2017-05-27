@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Omack.Core
 {
-    //this class is generating models from identity and could be used for common functions
+    //this class contains some identity models & Functions. Could be used for other common functions as well.
     public class SiteUtils
     {
     }

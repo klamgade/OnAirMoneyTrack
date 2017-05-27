@@ -51,7 +51,7 @@ namespace Omack.Api
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            loggerFactory.AddDebug(); //by default: Information level or more serious. to log critical error .AddDebug(LogLevel.Critical).
             app.UseStatusCodePages();  //to show status code to the browser. Otherwise we have to look through console to inspect status code.
             app.UseMvc();
         }
