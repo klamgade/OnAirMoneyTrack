@@ -13,12 +13,13 @@ namespace Omack.Api.Controllers
     [Route("api/values")]   //routing are of two types: 1. Conventional MVC Routing & 2. Attribute Routing. This is attribute routing.
     public class ValuesController : Controller
     {
-        private UnitOfWork unitOfWork; //
+        private UnitOfWork _unitOfWork; //
         private ILogger<ValuesController> _logger; //Ilogger service is implemented by default, so we don't have to add it as service but we can configure in ConfigureServices method in startup.cs.
-        public ValuesController(ILogger<ValuesController> logger, UnitOfWork unitOfWork) //d.I through constructor....also called as container 
+        public ValuesController(ILogger<ValuesController> logger, 
+                                UnitOfWork unitOfWork) //d.I through constructor....also called as container 
         {
             this._logger = logger;
-            this.unitOfWork = unitOfWork;//new UnitOfWork();
+            this._unitOfWork = unitOfWork;//new UnitOfWork();
 
         }
         //[HttpGet()]
@@ -33,7 +34,7 @@ namespace Omack.Api.Controllers
         [HttpGet()]
         public IActionResult GetItems()
         {
-            var items = unitOfWork.itemRepository.GetAll();   //later we will implement interface for this.
+            var items = _unitOfWork.itemRepository.GetAll();   //later we will implement interface for this.
             //var items = new SampleData(); if we initialize here, we dont need  "current" static method in the SampleData class.
             if (items == null)
             {
@@ -129,7 +130,7 @@ namespace Omack.Api.Controllers
         }
         protected override void Dispose(bool disposing)
       {
-         unitOfWork.Dispose();
+         _unitOfWork.Dispose();
          base.Dispose(disposing);
       }
 

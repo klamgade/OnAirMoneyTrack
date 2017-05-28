@@ -18,5 +18,10 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Omac.Data\Omack.Data.csproj" />
+    <ProjectReference Include="..\Omack.Core\Omack.Core.csproj" />
+    <ProjectReference Include="..\Omack.Services\Omack.Services.csproj" />
+  </ItemGroup>
 
 </Project>

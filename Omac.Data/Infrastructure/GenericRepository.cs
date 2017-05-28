@@ -18,14 +18,18 @@ namespace Omack.Data.Infrastructure
             this.context = context;
             this.dbSet = context.Set<TEntity>();
         }
-        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null )
+        public IQueryable<TEntity> GetAll()
+        {
+            return dbSet;
+        }
+        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null )
         {
             IQueryable<TEntity> query = dbSet; 
             if(filter != null)
             {
                  query = query.Where(filter);
             }
-            return query.ToList();
+            return query;
         }
         public TEntity GetById (int id)
         {

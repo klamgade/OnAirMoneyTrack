@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Omack.Services.ServiceImplementations;
 
 namespace Omac.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private ItemService _itemService;
+
+        public HomeController(ItemService itemService) //Dependecy Injection via constructor
+        {
+            _itemService = itemService;
+        }
         public IActionResult Index()
         {
-            return View();
+            var items = _itemService.GetAll();
+            return Ok(items); //return View();
         }
 
         public IActionResult About()
