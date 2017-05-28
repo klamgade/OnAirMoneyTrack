@@ -11,6 +11,7 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using Omack.Data.Infrastructure;
 
 namespace Omack.Api
 {
@@ -39,6 +40,7 @@ namespace Omack.Api
                     {
                         o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
                     });
+            services.AddScoped<UnitOfWork>();
             //sets the default camelcase format for returned json result to null, which will finally depened upon C# object's property names
             //.AddJsonOptions(o =>
             //{

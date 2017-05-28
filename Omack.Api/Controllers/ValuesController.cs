@@ -6,16 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Omack.Data;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Logging;
+using Omack.Data.Infrastructure;
 
 namespace Omack.Api.Controllers
 {
     [Route("api/values")]   //routing are of two types: 1. Conventional MVC Routing & 2. Attribute Routing. This is attribute routing.
     public class ValuesController : Controller
     {
+        private UnitOfWork unitOfWork; //
         private ILogger<ValuesController> _logger; //Ilogger service is implemented by default, so we don't have to add it as service but we can configure in ConfigureServices method in startup.cs.
-        public ValuesController(ILogger<ValuesController> logger) //d.I through constructor....also called as container 
+        public ValuesController(ILogger<ValuesController> logger, UnitOfWork unitOfWork) //d.I through constructor....also called as container 
         {
-            _logger = logger;
+            this._logger = logger;
+            this.unitOfWork = unitOfWork;//new UnitOfWork();
+
         }
         //[HttpGet()]
         public JsonResult GetItemsTest()
@@ -29,7 +33,7 @@ namespace Omack.Api.Controllers
         [HttpGet()]
         public IActionResult GetItems()
         {
-            var items = SampleData.Current.Items;   //later we will implement interface for this.
+            var items = unitOfWork.itemRepository.GetAll();   //later we will implement interface for this.
             //var items = new SampleData(); if we initialize here, we dont need  "current" static method in the SampleData class.
             if (items == null)
             {
@@ -49,7 +53,7 @@ namespace Omack.Api.Controllers
         {
             try
             {
-                throw new Exception("Exception Sample");
+                //throw new Exception("Exception Sample");
                 var item = SampleData.Current.Items.SingleOrDefault(i => i.Id == id);
                 if (item == null)
                 {
@@ -123,6 +127,11 @@ namespace Omack.Api.Controllers
                 return NotFound();
             }
         }
+        protected override void Dispose(bool disposing)
+      {
+         unitOfWork.Dispose();
+         base.Dispose(disposing);
+      }
 
     }
 }
