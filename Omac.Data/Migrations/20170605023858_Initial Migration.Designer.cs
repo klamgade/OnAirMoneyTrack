@@ -8,9 +8,10 @@ using Omack.Data.DAL;
 namespace Omack.Data.Migrations
 {
     [DbContext(typeof(OmackContext))]
-    partial class OmackContextModelSnapshot : ModelSnapshot
+    [Migration("20170605023858_Initial Migration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -152,8 +153,6 @@ namespace Omack.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
-
                     b.ToTable("Notifications");
                 });
 
@@ -211,14 +210,6 @@ namespace Omack.Data.Migrations
                     b.HasOne("Omack.Data.Models.Media", "Media")
                         .WithMany()
                         .HasForeignKey("MediaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Omack.Data.Models.Notification", b =>
-                {
-                    b.HasOne("Omack.Data.Models.Group", "Group")
-                        .WithMany()
-                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

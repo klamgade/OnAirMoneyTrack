@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Omac.Data\Omack.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>
