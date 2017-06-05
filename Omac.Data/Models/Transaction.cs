@@ -25,7 +25,7 @@ namespace Omack.Data.Models
         public int GroupId { get; set; }
 
         //Navigation Properties
-        //public User User { get; set; }
+        public User User { get; set; }
         public Group Group { get; set; }
 
         //System Properties  [Note: UpdatedBy & CreatedBy = Current Loggedin User ID]

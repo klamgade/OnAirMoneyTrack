@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Omack.Data.Models;
 using System;
@@ -7,9 +8,8 @@ using System.Text;
 
 namespace Omack.Data.DAL
 {
-    public class OmackContext: DbContext
+    public class OmackContext: IdentityDbContext<User>
     {
-        //IConfiguration _config;
         public OmackContext()
         {
         }

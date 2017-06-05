@@ -17,7 +17,7 @@ namespace Omack.Data.Models
 
         //Navigation Properties
         public Group Group { get; set; }
-        //public User User { get; set; }
+        public User User { get; set; }
 
         //System Properties  [Note: UpdatedBy & CreatedBy = Current Loggedin User ID]
         public DateTime CreatedOn { get; set; }
