@@ -20,9 +20,9 @@ namespace Omack.Data.Models
         public Boolean IsActive { get; set; }
 
         //System Properties  [Note: UpdatedBy & CreatedBy = Current Loggedin User ID]
-        public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
-        public int CreatedBy { get; set; }        
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+        public int? UpdatedBy { get; set; }
+        public int? CreatedBy { get; set; }        
     }
 }

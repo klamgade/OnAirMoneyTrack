@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Omack.Data.DAL
 {
-    public class OmackContext: IdentityDbContext<User>
+    public class OmackContext: IdentityDbContext<User, Role, int>
     {
         public OmackContext()
         {
@@ -26,6 +26,12 @@ namespace Omack.Data.DAL
 
             //TODO: Use config file for connection string..
             //TODO: Add Indentity User - using identity framework
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<User>().ToTable("User");
+            builder.Entity<Role>().ToTable("Role");
         }
     }
 }

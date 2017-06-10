@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Omack.Data.Models
 {
-    public class User : IdentityUser
+    public class User : IdentityUser<int>
     {
         public int MediaId {get; set;}
 
