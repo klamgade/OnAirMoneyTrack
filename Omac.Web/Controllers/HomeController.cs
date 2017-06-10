@@ -4,21 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Omack.Services.ServiceImplementations;
+using Omack.Data.Models;
+using Omack.Data.DAL;
+using Omack.Data.Infrastructure;
+using Omack.Services.Services;
+using Microsoft.AspNetCore.Identity;
+using System.Threading;
 
 namespace Omac.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private ItemService _itemService;
 
-        public HomeController(ItemService itemService) //Dependecy Injection via constructor
+        public HomeController() 
         {
-            _itemService = itemService;
         }
-        public IActionResult Index()
+        
+        public IActionResult Index(int? Id)
         {
-            var items = _itemService.GetAll();
-            return Ok(items); //return View();
+            return Ok("What the fuck you want !!!");
         }
 
         public IActionResult About()

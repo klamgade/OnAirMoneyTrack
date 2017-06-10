@@ -9,6 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Omack.Services.ServiceImplementations;
 using Omack.Data.Infrastructure;
+using Omack.Services.Services;
+using Omack.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Omack.Data.DAL;
 
 namespace Omac.Web
 {
@@ -23,24 +27,29 @@ namespace Omac.Web
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-
         public IConfigurationRoot Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddMvc();
-            services.AddSingleton<ItemService>();
-            services.AddSingleton<UnitOfWork>();
-        }
+            services.AddIdentity<User, IdentityRole<int>>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+                //config.Cookies.ApplicationCookie.LoginPath = "/"; //redirect use to this url if the user is not logged in
+            }).AddEntityFrameworkStores<OmackContext, int>();
 
+            services.AddScoped<OmackContext>();
+            //services.AddScoped<IItemService, ItemService>();  //Scoped - one object for all request from specific client.
+            //services.AddScoped<IGroupService, GroupService>();
+            services.AddScoped<UnitOfWork>();
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -50,9 +59,8 @@ namespace Omac.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
             app.UseStaticFiles();
-
+            app.UseIdentity();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

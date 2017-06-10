@@ -11,7 +11,9 @@ namespace Omack.Data.Infrastructure
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
         TEntity GetById(int id);
-        //void Add(TEntity entity);
+        void Add(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(int Id);
         //void Update(TEntity entity);
         //void Delete(int id);
         //void Delete(Expression<Func<TEntity, bool>> where);

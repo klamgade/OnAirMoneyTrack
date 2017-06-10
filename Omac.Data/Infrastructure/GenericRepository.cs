@@ -34,6 +34,23 @@ namespace Omack.Data.Infrastructure
         public TEntity GetById (int id)
         {
             return dbSet.Find(id);
-        }         
+        }   
+        
+        public void Add(TEntity entity)
+        {
+            dbSet.Add(entity);
+        }
+        public void Update(TEntity entity)
+        {
+            context.Entry(entity).State = EntityState.Modified;
+        }
+        public void Delete(int Id)
+        {
+            var entity = dbSet.Find(Id);
+            if(entity != null)
+            {
+                dbSet.Remove(entity);
+            }
+        }
     } 
 }

@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Omack.Data.Models
+namespace Omack.Services.Models
 {
-    public class Media
+    public class MediaServiceModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
         public Guid Guid { get; set; }
         public Boolean IsActive { get; set; }
 
-        //System Properties  [Note: UpdatedBy & CreatedBy = Current Loggedin User ID]
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public int? UpdatedBy { get; set; }

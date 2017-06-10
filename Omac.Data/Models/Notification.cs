@@ -21,10 +21,12 @@ namespace Omack.Data.Models
         
         //Nav properties
         public Group Group { get; set; }
-        //public User User {get; set;
+        public User User { get; set; }
 
         //System Properties  [Note: UpdatedBy & CreatedBy = Current Loggedin User ID]
-        public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+        public int? UpdatedBy { get; set; }
+        public int? CreatedBy { get; set; }
     }
 }
